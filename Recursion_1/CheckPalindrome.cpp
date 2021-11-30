@@ -1,4 +1,27 @@
 //check for palindrome 
+/*
+
+Check whether a given String S is a palindrome using recursion. Return true or false.
+
+Input Format :
+String S
+
+Output Format :
+'true' or 'false'
+
+Constraints :
+0 <= |S| <= 1000
+
+where |S| represents length of string S.
+
+Sample Input 1 :
+racecar
+
+Sample Output 1:
+true
+
+
+*/
 #include <iostream>
 using namespace std;
 
