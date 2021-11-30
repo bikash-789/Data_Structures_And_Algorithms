@@ -1,0 +1,40 @@
+//check for palindrome 
+#include <iostream>
+using namespace std;
+
+bool helperFunc(char input[], int start, int end){
+    //base case
+    if(start==end){
+        return true;
+    }
+
+    else if(input[start]!=input[end]){
+        return false;
+    }
+
+    //recursive call
+    bool smallAns = helperFunc(input, start+1, end-1);
+
+    //small calculation
+    return smallAns && input[start]==input[end];
+}
+
+bool checkPalindrome(char input[]){
+    //calculate length of string
+    int length_of_string = 0;
+    while(input[length_of_string]!='\0'){
+        length_of_string++;
+    }
+    return helperFunc(input, 0, length_of_string-1);
+}
+int main(){
+    char input[50];
+    cin >> input;
+    
+    if(checkPalindrome(input)) {
+        cout << "true" << endl;
+    }
+    else {
+        cout << "false" << endl;
+    }
+}
