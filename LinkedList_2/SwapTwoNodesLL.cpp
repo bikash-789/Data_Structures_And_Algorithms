@@ -67,8 +67,6 @@ void print(Node *head)
 	cout << endl;
 }
 
-
-
 /****************************************************************
  
     Following is the class structure of the Node class:
@@ -166,6 +164,9 @@ Node *swapNodes(Node *head, int i, int j)
     }
     
 }
+
+
+
 int main()
 {
 	int t;
