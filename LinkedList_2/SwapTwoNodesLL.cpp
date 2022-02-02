@@ -85,84 +85,82 @@ void print(Node *head)
 
 *****************************************************************/
 
-int findLength(Node* head){
-    int count=0;
-    while(head!=NULL){
-        count++;
-        head=head->next;
-    }
-    return count;
-}
 
 Node *swapNodes(Node *head, int i, int j)
 {
-	//Write your code here
-    if(head==NULL){
-        return head;
-    }
-    
-    int len=findLength(head);
-    if(i==j){
-        return head;
-    }
-    if(i<=len-1 && j<=len-1){
-        Node *tempI = head, *tempJ = head, *tempM = head, *tempN=head;
-        
-        int count=0;
-        if(i>0){
-            while(count!=i-1){
-                tempI = tempI->next;
-                count++;
-             }     
-        }
-        
-        count=0;
-        if(j>0){
-            while(count!=j-1){
-                tempJ = tempJ->next;
-                count++;
-            }
-        }
-        if(i==0){
-            Node *t = head->next;
-            head->next = tempJ->next->next;
-            tempJ->next->next = t;
-            head = tempJ->next;
-            return head;
-        }
-        else if(j==0){
-            Node *t = head->next;
-            head->next = tempI->next->next;
-            tempI->next->next = t;
-            head=tempI->next;
-            return head;
-        }
-        tempM = tempI->next;
-        tempN = tempJ->next;
-        if(i-j==-1){
-            Node *t = tempN->next;
-            tempI->next = tempN;
-            tempN->next = tempM;
-            tempM->next = t;
-            return head;
-        }
-        else if(i-j == 1){
-            Node *t = tempM->next;
-            tempJ->next = tempM;
-            tempM->next = tempN;
-            tempN->next = t;
-            return head;
-        }
-        
-        Node *t = tempM->next;
-        tempM->next = tempN->next;
-        tempN->next = t;
-        tempI->next = tempN;
-        tempJ->next = tempM;
-        
-        return head;
-    }
-    
+	if(head==NULL) return NULL;
+	
+	//swap two nodes
+	//declare variables 
+	Node* prevI=head, *prevJ=head, *currentI=head, *currentJ=head;
+	//traverse through nodes until prevI-1
+	int count=0;
+	if(i>0)
+	{
+	    while(count!=i-1)
+	    {
+	        prevI=prevI->next;
+	        count++;
+	    }
+	}
+	count=0;
+	//traverse through the nodes until prevJ-1
+	if(j>0)
+	{
+	    while(count != j-1)
+	    {
+	        prevJ = prevJ->next;
+	        count++;
+	    }
+	}
+	
+	if(i==0)
+	{
+	    Node* temp = head->next;
+	    currentJ=prevJ->next;
+	    head->next = prevJ->next->next;
+	    prevJ->next->next = temp;
+	    prevJ->next = head;
+	    head=currentJ;
+	    return head;
+	}
+	else if(j==0)
+	{
+	    Node* temp = head->next;
+	    currentI = prevI->next;
+	    head->next = currentI->next;
+	    currentI->next = temp;
+	    prevI->next = head;
+	    head=currentI;
+	    return head;
+	}
+	currentI=prevI->next;
+	currentJ=prevJ->next;
+	
+	//check if i and j are present at alternate positions or not
+	if(i-j == -1)
+	{
+	    Node* temp = currentJ->next;
+	    prevI->next = currentJ;
+	    currentJ->next = currentI;
+	    currentI->next = temp;
+	    return head;
+	}
+	else if(i-j==1)
+	{
+	    Node* temp = currentI->next;
+	    prevJ->next = currentI;
+	    currentI->next = currentJ;
+	    currentJ->next = temp;
+	    return head;
+	}
+	
+	Node *temp = currentI->next;
+	prevI->next = currentJ;
+	currentI->next = currentJ->next;
+	currentJ->next = temp;
+	prevJ->next = currentI;
+	return head;
 }
 
 
